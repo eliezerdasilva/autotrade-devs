@@ -1,0 +1,127 @@
+package br.com.autotrade.controllers;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import br.com.autotrade.dtos.BuyerDTO;
+import br.com.autotrade.dtos.SalesRecordDTO;
+import br.com.autotrade.models.SalesRecords;
+import br.com.autotrade.services.SalesRecordsServices;
+
+import java.util.List;
+
+@Api(value = "SalesRecordsController", description = "API para gerenciamento de registros de vendas")
+@RestController
+@RequestMapping(value = "/api/salesRecords")
+public class SalesRecordsController {
+
+    @Autowired
+    private SalesRecordsServices salesRecordsService;
+
+    @Operation(summary = "Adicionar um registro de venda")
+    @ApiResponse(responseCode = "204", description = "Registro de venda")
+    @ApiResponse(responseCode = "404", description = "Registro de venda")
+    @PostMapping
+    public ResponseEntity<Object> addSalesRecords(@Valid @RequestBody SalesRecordDTO salesRecordDTO) {
+        try {
+            salesRecordsService.addSalesRecords(salesRecordDTO);
+            // Retorne uma resposta adequada de acordo com o sucesso da operação
+            return ResponseEntity.ok("Registro de venda adicionado com sucesso");
+        } catch (Exception e) {
+            // Trate exceções e retorne uma resposta adequada em caso de erro
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Excluir um registro de venda pelo ID")
+    @ApiResponse(responseCode = "204", description = "Registro de venda Excluido")
+    @ApiResponse(responseCode = "404", description = "Registro de venda não Excluido")
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Object> deleteSalesRecords( @PathVariable Long id) {
+        try {
+            salesRecordsService.deleteSalesRecords(id);
+            // Retorne uma resposta adequada de acordo com o sucesso da operação
+            return ResponseEntity.ok("Registro de venda excluído com sucesso");
+        } catch (Exception e) {
+            // Trate exceções e retorne uma resposta adequada em caso de erro
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Atualizar informações de um registro de venda")
+    @ApiResponse(responseCode = "204", description = "Registro de venda Atualizado")
+    @ApiResponse(responseCode = "404", description = "Registro de venda não Atualizado")
+    @PutMapping
+    public ResponseEntity<Object> updateSalesRecords(@Valid @RequestBody SalesRecordDTO salesRecordDTO) {
+        SalesRecords salesRecord = salesRecordsService.searchAnSalesRecordById(salesRecordDTO.getId());
+
+        if (salesRecord == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        try {
+            BeanUtils.copyProperties(salesRecordDTO, salesRecord);
+            salesRecordsService.save(salesRecord);
+            // Retorne uma resposta adequada de acordo com o sucesso da operação
+            return ResponseEntity.ok("Registro de venda atualizado com sucesso");
+        } catch (Exception e) {
+            // Trate exceções e retorne uma resposta adequada em caso de erro
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Listar todos os registros de venda")
+    @GetMapping("/listAllSalesRecord")
+    @ApiResponse(responseCode = "204", description = "Registros de venda listados")
+    @ApiResponse(responseCode = "404", description = "Registros de venda não encontrado")
+    public ResponseEntity<List<SalesRecordDTO>> listSalesRecord() {
+        try {
+            List<SalesRecordDTO> salesRecords = salesRecordsService.listAllSalesRecords();
+            
+            if (!salesRecords.isEmpty()) {
+                return ResponseEntity.ok(salesRecords);
+            } else {
+                return ResponseEntity.noContent().build();
+            }
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    } 
+    
+
+    @Operation(summary= "Encontrar um registro de venda pelo ID")
+    @GetMapping(value = "/{id}")
+    @ApiResponse(responseCode = "204", description = "Registro de venda existente")
+    @ApiResponse(responseCode = "404", description = "Registro de venda não encontrado")
+    public ResponseEntity<SalesRecordDTO> findSalesRecordById(@PathVariable Long id) {
+        try {
+            SalesRecordDTO salesRecord = salesRecordsService.searchAnSalesRecordDTOById(id);
+
+            if (salesRecord != null) {
+                return ResponseEntity.ok(salesRecord);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            // Registre a exceção para fins de depuração
+            e.printStackTrace();
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+}
