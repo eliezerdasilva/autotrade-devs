@@ -9,5 +9,8 @@ import br.com.autotrade.models.SalesRecords;
 
 public interface SalesRecordsRepository extends JpaRepository<SalesRecords, Long> {
 
+	 void deleteByBuyerId(Long buyerId);
+	 void deleteByVehicleId(Long vehicleId);
+
 	
 }

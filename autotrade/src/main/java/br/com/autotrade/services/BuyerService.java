@@ -2,6 +2,7 @@ package br.com.autotrade.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -12,6 +13,7 @@ import br.com.autotrade.dtos.BuyerDTO;
 import br.com.autotrade.models.Address;
 import br.com.autotrade.models.Buyer;
 import br.com.autotrade.repository.BuyerRepository;
+import br.com.autotrade.repository.SalesRecordsRepository;
 import jakarta.validation.Valid;
 
 @Service
@@ -22,6 +24,9 @@ public class BuyerService {
 
 	@Autowired
 	BuyerRepository buyerRepository;
+	
+	@Autowired
+	SalesRecordsRepository recordsRepository;
 	
 	public Long addBuyer(@Valid BuyerDTO buyerDTO) throws Exception {
 		if (buyerDTO == null) {
@@ -43,7 +48,7 @@ public class BuyerService {
 			if (buyerRepository.findByCpf(buyerDTO.getCpf()) != null) {
 				throw new Exception("Cliente já cadastrada");
 			}
-
+			
 			Buyer buyer = mapper.map(buyerDTO, Buyer.class);
 			System.out.println(buyer);
 			return save(buyer);
@@ -57,8 +62,17 @@ public class BuyerService {
 	
 
 	public void deleteBuyer(Long id) throws Exception {
-
+		Optional<Buyer> buyer ;
 		try {
+		 buyer = buyerRepository.findById(id);	
+		}catch (Exception e) {
+			throw new Exception("Erro ao excluir");
+		}
+		if(buyer==null ) {
+			throw new Exception("Cliente não existente");
+		}
+		try {
+			recordsRepository.deleteByBuyerId(id);
 			buyerRepository.deleteById(id);
 		} catch (Exception e) {
 			throw new Exception("Erro ao excluir");
@@ -67,6 +81,16 @@ public class BuyerService {
 	
 
 	public Buyer searchAnBuyerById(Long id) throws Exception {
+		
+		Optional<Buyer> buyer ;
+		try {
+		 buyer = buyerRepository.findById(id);	
+		}catch (Exception e) {
+			throw new Exception("Erro ao excluir");
+		}
+		if(buyer==null ) {
+			throw new Exception("Cliente não existente");
+		}
 		try {
 			return mapper.map(buyerRepository.findById(id), Buyer.class);
 		} catch (Exception e) {
@@ -75,6 +99,15 @@ public class BuyerService {
 	}
 
 	public BuyerDTO searchAnBuyerDTOById(Long id) throws Exception {
+		Optional<Buyer> buyer ;
+		try {
+		 buyer = buyerRepository.findById(id);	
+		}catch (Exception e) {
+			throw new Exception("Erro ao excluir");
+		}
+		if(buyer==null ) {
+			throw new Exception("Cliente não existente");
+		}
 		try {
 			return mapper.map(buyerRepository.findById(id), BuyerDTO.class);
 		} catch (Exception e) {
@@ -84,6 +117,7 @@ public class BuyerService {
 	
 
 	public Long updateBuyer(BuyerDTO buyerDTO) throws Exception {
+		
 		try {
 		Buyer Buyer = mapper.map(buyerDTO, Buyer.class);
 		return save(Buyer);

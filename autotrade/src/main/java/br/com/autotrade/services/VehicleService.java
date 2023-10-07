@@ -10,6 +10,7 @@ import br.com.autotrade.dtos.BuyerDTO;
 import br.com.autotrade.dtos.VehicleDTO;
 import br.com.autotrade.models.Buyer;
 import br.com.autotrade.models.Vehicle;
+import br.com.autotrade.repository.SalesRecordsRepository;
 import br.com.autotrade.repository.VehicleRepository;
 import jakarta.validation.Valid;
 
@@ -21,6 +22,9 @@ public class VehicleService {
 
 	@Autowired
 	VehicleRepository vehicleRepository;
+	
+	@Autowired
+	SalesRecordsRepository salesRecordsRepository;
 
 	public Long addVehicle(@Valid VehicleDTO vehicleDTO) throws Exception {
 		if (vehicleDTO == null) {
@@ -49,6 +53,7 @@ public class VehicleService {
 	public void deleteVehicle(Long id) throws Exception {
 
 		try {
+			salesRecordsRepository.deleteByVehicleId(id);
 			vehicleRepository.deleteById(id);
 		} catch (Exception e) {
 			throw new Exception("Erro ao excluir");
