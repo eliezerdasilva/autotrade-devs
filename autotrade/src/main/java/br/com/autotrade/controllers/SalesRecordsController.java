@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.autotrade.dtos.BuyerDTO;
 import br.com.autotrade.dtos.SalesRecordDTO;
+import br.com.autotrade.dtos.VehicleDTO;
 import br.com.autotrade.models.SalesRecords;
 import br.com.autotrade.services.SalesRecordsServices;
 
@@ -89,20 +90,21 @@ public class SalesRecordsController {
     @GetMapping("/listAllSalesRecord")
     @ApiResponse(responseCode = "204", description = "Registros de venda listados")
     @ApiResponse(responseCode = "404", description = "Registros de venda não encontrado")
-    public ResponseEntity<List<Object>> listSalesRecord() {
-        try {
-        	List<Object> objectList = new ArrayList<>();
-            List<SalesRecordDTO> salesRecords = salesRecordsService.listAllSalesRecords();
-            objectList.addAll(salesRecords);
+    public ResponseEntity<List<SalesRecordDTO>> listSalesRecord() {
+    	 try {
+             List<SalesRecordDTO> sales = salesRecordsService.listAllSalesRecords();
 
-            if (!salesRecords.isEmpty()) {
-                return (ResponseEntity<List<Object>>) objectList;
-            } else {
-                throw new Exception("Nenhum registro de Venda");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(Collections.singletonList(e.getMessage()));
-        }
+             if (!sales.isEmpty()) {
+                 return ResponseEntity.ok(sales);
+             } else {
+                 return ResponseEntity.noContent().build();
+             }
+         } catch (Exception e) {
+             // Registre a exceção para fins de depuração
+             e.printStackTrace();
+             
+             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+         }
     }
 
     

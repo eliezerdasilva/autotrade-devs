@@ -71,6 +71,7 @@ public class VehicleController {
         if (vehicle == null) {
             return ResponseEntity.notFound().build();
         }
+        vehicle = new Vehicle();
 
         try {
             BeanUtils.copyProperties(vehicleDTO, vehicle);

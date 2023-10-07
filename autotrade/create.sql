@@ -22280,3 +22280,489 @@
        add constraint FK5brf23uurmw94aos9lda2hdf0 
        foreign key (vehicle_id) 
        references vehicle;
+
+    create table buyer (
+        birth_date date not null,
+        id bigserial not null,
+        cpf varchar(14) not null,
+        rg varchar(14) not null,
+        name varchar(100) not null,
+        cep varchar(255) not null,
+        city varchar(255) not null,
+        email varchar(255) not null,
+        road varchar(255) not null,
+        state varchar(255) not null,
+        telephone varchar(255) not null,
+        primary key (id)
+    );
+
+    create table sales_records (
+        sale_date date not null,
+        buyer_id bigint not null,
+        id bigserial not null,
+        vehicle_id bigint not null,
+        payment varchar(255) not null check (payment in ('MONEY','DEBIT','CREDIT')),
+        primary key (id)
+    );
+
+    create table vehicle (
+        amount_passengers numeric(38,0) not null check (amount_passengers>=1),
+        door_quantity numeric(38,0) not null check (door_quantity>=1),
+        mileage float4 not null check (mileage>=0),
+        purchase_price float(53) not null,
+        sale_price float(53) not null,
+        year date not null,
+        plate varchar(7) not null,
+        id bigserial not null,
+        renavem bigint not null unique,
+        model varchar(100) not null,
+        brand varchar(255) not null,
+        chassis_number varchar(255) not null unique,
+        color varchar(255) not null check (color in ('RED','BLUE','GREEN')),
+        cylinder_capacity varchar(255) not null,
+        sale_situation varchar(255) not null check (sale_situation in ('SOLD','AVAILABLE')),
+        transmission varchar(255) not null check (transmission in ('MANUAL','SEMIAUTOMATIC','AUTOMATIC')),
+        primary key (id)
+    );
+
+    alter table if exists sales_records 
+       add constraint FKsgba4lq96wgg64wrocf7fh9h0 
+       foreign key (buyer_id) 
+       references buyer;
+
+    alter table if exists sales_records 
+       add constraint FK5brf23uurmw94aos9lda2hdf0 
+       foreign key (vehicle_id) 
+       references vehicle;
+
+    create table buyer (
+        birth_date date not null,
+        id bigserial not null,
+        cpf varchar(14) not null,
+        rg varchar(14) not null,
+        name varchar(100) not null,
+        cep varchar(255) not null,
+        city varchar(255) not null,
+        email varchar(255) not null,
+        road varchar(255) not null,
+        state varchar(255) not null,
+        telephone varchar(255) not null,
+        primary key (id)
+    );
+
+    create table sales_records (
+        sale_date date not null,
+        buyer_id bigint not null,
+        id bigserial not null,
+        vehicle_id bigint not null,
+        payment varchar(255) not null check (payment in ('MONEY','DEBIT','CREDIT')),
+        primary key (id)
+    );
+
+    create table vehicle (
+        amount_passengers numeric(38,0) not null check (amount_passengers>=1),
+        door_quantity numeric(38,0) not null check (door_quantity>=1),
+        mileage float4 not null check (mileage>=0),
+        purchase_price float(53) not null,
+        sale_price float(53) not null,
+        year date not null,
+        plate varchar(7) not null,
+        id bigserial not null,
+        renavem bigint not null unique,
+        model varchar(100) not null,
+        brand varchar(255) not null,
+        chassis_number varchar(255) not null unique,
+        color varchar(255) not null check (color in ('RED','BLUE','GREEN')),
+        cylinder_capacity varchar(255) not null,
+        sale_situation varchar(255) not null check (sale_situation in ('SOLD','AVAILABLE')),
+        transmission varchar(255) not null check (transmission in ('MANUAL','SEMIAUTOMATIC','AUTOMATIC')),
+        primary key (id)
+    );
+
+    alter table if exists sales_records 
+       add constraint FKsgba4lq96wgg64wrocf7fh9h0 
+       foreign key (buyer_id) 
+       references buyer;
+
+    alter table if exists sales_records 
+       add constraint FK5brf23uurmw94aos9lda2hdf0 
+       foreign key (vehicle_id) 
+       references vehicle;
+
+    create table buyer (
+        birth_date date not null,
+        id bigserial not null,
+        cpf varchar(14) not null,
+        rg varchar(14) not null,
+        name varchar(100) not null,
+        cep varchar(255) not null,
+        city varchar(255) not null,
+        email varchar(255) not null,
+        road varchar(255) not null,
+        state varchar(255) not null,
+        telephone varchar(255) not null,
+        primary key (id)
+    );
+
+    create table sales_records (
+        sale_date date not null,
+        buyer_id bigint not null,
+        id bigserial not null,
+        vehicle_id bigint not null,
+        payment varchar(255) not null check (payment in ('MONEY','DEBIT','CREDIT')),
+        primary key (id)
+    );
+
+    create table vehicle (
+        amount_passengers numeric(38,0) not null check (amount_passengers>=1),
+        door_quantity numeric(38,0) not null check (door_quantity>=1),
+        mileage float4 not null check (mileage>=0),
+        purchase_price float(53) not null,
+        sale_price float(53) not null,
+        year date not null,
+        plate varchar(7) not null,
+        id bigserial not null,
+        renavem bigint not null unique,
+        model varchar(100) not null,
+        brand varchar(255) not null,
+        chassis_number varchar(255) not null unique,
+        color varchar(255) not null check (color in ('RED','BLUE','GREEN')),
+        cylinder_capacity varchar(255) not null,
+        sale_situation varchar(255) not null check (sale_situation in ('SOLD','AVAILABLE')),
+        transmission varchar(255) not null check (transmission in ('MANUAL','SEMIAUTOMATIC','AUTOMATIC')),
+        primary key (id)
+    );
+
+    alter table if exists sales_records 
+       add constraint FKsgba4lq96wgg64wrocf7fh9h0 
+       foreign key (buyer_id) 
+       references buyer;
+
+    alter table if exists sales_records 
+       add constraint FK5brf23uurmw94aos9lda2hdf0 
+       foreign key (vehicle_id) 
+       references vehicle;
+
+    create table buyer (
+        birth_date date not null,
+        id bigserial not null,
+        cpf varchar(14) not null,
+        rg varchar(14) not null,
+        name varchar(100) not null,
+        cep varchar(255) not null,
+        city varchar(255) not null,
+        email varchar(255) not null,
+        road varchar(255) not null,
+        state varchar(255) not null,
+        telephone varchar(255) not null,
+        primary key (id)
+    );
+
+    create table sales_records (
+        sale_date date not null,
+        buyer_id bigint not null,
+        id bigserial not null,
+        vehicle_id bigint not null,
+        payment varchar(255) not null check (payment in ('MONEY','DEBIT','CREDIT')),
+        primary key (id)
+    );
+
+    create table vehicle (
+        amount_passengers numeric(38,0) not null check (amount_passengers>=1),
+        door_quantity numeric(38,0) not null check (door_quantity>=1),
+        mileage float4 not null check (mileage>=0),
+        purchase_price float(53) not null,
+        sale_price float(53) not null,
+        year date not null,
+        plate varchar(7) not null,
+        id bigserial not null,
+        renavem bigint not null unique,
+        model varchar(100) not null,
+        brand varchar(255) not null,
+        chassis_number varchar(255) not null unique,
+        color varchar(255) not null check (color in ('RED','BLUE','GREEN')),
+        cylinder_capacity varchar(255) not null,
+        sale_situation varchar(255) not null check (sale_situation in ('SOLD','AVAILABLE')),
+        transmission varchar(255) not null check (transmission in ('MANUAL','SEMIAUTOMATIC','AUTOMATIC')),
+        primary key (id)
+    );
+
+    alter table if exists sales_records 
+       add constraint FKsgba4lq96wgg64wrocf7fh9h0 
+       foreign key (buyer_id) 
+       references buyer;
+
+    alter table if exists sales_records 
+       add constraint FK5brf23uurmw94aos9lda2hdf0 
+       foreign key (vehicle_id) 
+       references vehicle;
+
+    create table buyer (
+        birth_date date not null,
+        id bigserial not null,
+        cpf varchar(14) not null,
+        rg varchar(14) not null,
+        name varchar(100) not null,
+        cep varchar(255) not null,
+        city varchar(255) not null,
+        email varchar(255) not null,
+        road varchar(255) not null,
+        state varchar(255) not null,
+        telephone varchar(255) not null,
+        primary key (id)
+    );
+
+    create table sales_records (
+        sale_date date not null,
+        buyer_id bigint not null,
+        id bigserial not null,
+        vehicle_id bigint not null,
+        payment varchar(255) not null check (payment in ('MONEY','DEBIT','CREDIT')),
+        primary key (id)
+    );
+
+    create table vehicle (
+        amount_passengers numeric(38,0) not null check (amount_passengers>=1),
+        door_quantity numeric(38,0) not null check (door_quantity>=1),
+        mileage float4 not null check (mileage>=0),
+        purchase_price float(53) not null,
+        sale_price float(53) not null,
+        year date not null,
+        plate varchar(7) not null,
+        id bigserial not null,
+        renavem bigint not null unique,
+        model varchar(100) not null,
+        brand varchar(255) not null,
+        chassis_number varchar(255) not null unique,
+        color varchar(255) not null check (color in ('RED','BLUE','GREEN')),
+        cylinder_capacity varchar(255) not null,
+        sale_situation varchar(255) not null check (sale_situation in ('SOLD','AVAILABLE')),
+        transmission varchar(255) not null check (transmission in ('MANUAL','SEMIAUTOMATIC','AUTOMATIC')),
+        primary key (id)
+    );
+
+    alter table if exists sales_records 
+       add constraint FKsgba4lq96wgg64wrocf7fh9h0 
+       foreign key (buyer_id) 
+       references buyer;
+
+    alter table if exists sales_records 
+       add constraint FK5brf23uurmw94aos9lda2hdf0 
+       foreign key (vehicle_id) 
+       references vehicle;
+
+    create table buyer (
+        birth_date date not null,
+        id bigserial not null,
+        cpf varchar(14) not null,
+        rg varchar(14) not null,
+        name varchar(100) not null,
+        cep varchar(255) not null,
+        city varchar(255) not null,
+        email varchar(255) not null,
+        road varchar(255) not null,
+        state varchar(255) not null,
+        telephone varchar(255) not null,
+        primary key (id)
+    );
+
+    create table sales_records (
+        sale_date date not null,
+        buyer_id bigint not null,
+        id bigserial not null,
+        vehicle_id bigint not null,
+        payment varchar(255) not null check (payment in ('MONEY','DEBIT','CREDIT')),
+        primary key (id)
+    );
+
+    create table vehicle (
+        amount_passengers numeric(38,0) not null check (amount_passengers>=1),
+        door_quantity numeric(38,0) not null check (door_quantity>=1),
+        mileage float4 not null check (mileage>=0),
+        purchase_price float(53) not null,
+        sale_price float(53) not null,
+        year date not null,
+        plate varchar(7) not null,
+        id bigserial not null,
+        renavem bigint not null unique,
+        model varchar(100) not null,
+        brand varchar(255) not null,
+        chassis_number varchar(255) not null unique,
+        color varchar(255) not null check (color in ('RED','BLUE','GREEN')),
+        cylinder_capacity varchar(255) not null,
+        sale_situation varchar(255) not null check (sale_situation in ('SOLD','AVAILABLE')),
+        transmission varchar(255) not null check (transmission in ('MANUAL','SEMIAUTOMATIC','AUTOMATIC')),
+        primary key (id)
+    );
+
+    alter table if exists sales_records 
+       add constraint FKsgba4lq96wgg64wrocf7fh9h0 
+       foreign key (buyer_id) 
+       references buyer;
+
+    alter table if exists sales_records 
+       add constraint FK5brf23uurmw94aos9lda2hdf0 
+       foreign key (vehicle_id) 
+       references vehicle;
+
+    create table buyer (
+        birth_date date not null,
+        id bigserial not null,
+        cpf varchar(14) not null,
+        rg varchar(14) not null,
+        name varchar(100) not null,
+        cep varchar(255) not null,
+        city varchar(255) not null,
+        email varchar(255) not null,
+        road varchar(255) not null,
+        state varchar(255) not null,
+        telephone varchar(255) not null,
+        primary key (id)
+    );
+
+    create table sales_records (
+        sale_date date not null,
+        buyer_id bigint not null,
+        id bigserial not null,
+        vehicle_id bigint not null,
+        payment varchar(255) not null check (payment in ('MONEY','DEBIT','CREDIT')),
+        primary key (id)
+    );
+
+    create table vehicle (
+        amount_passengers numeric(38,0) not null check (amount_passengers>=1),
+        door_quantity numeric(38,0) not null check (door_quantity>=1),
+        mileage float4 not null check (mileage>=0),
+        purchase_price float(53) not null,
+        sale_price float(53) not null,
+        year date not null,
+        plate varchar(7) not null,
+        id bigserial not null,
+        renavem bigint not null unique,
+        model varchar(100) not null,
+        brand varchar(255) not null,
+        chassis_number varchar(255) not null unique,
+        color varchar(255) not null check (color in ('RED','BLUE','GREEN')),
+        cylinder_capacity varchar(255) not null,
+        sale_situation varchar(255) not null check (sale_situation in ('SOLD','AVAILABLE')),
+        transmission varchar(255) not null check (transmission in ('MANUAL','SEMIAUTOMATIC','AUTOMATIC')),
+        primary key (id)
+    );
+
+    alter table if exists sales_records 
+       add constraint FKsgba4lq96wgg64wrocf7fh9h0 
+       foreign key (buyer_id) 
+       references buyer;
+
+    alter table if exists sales_records 
+       add constraint FK5brf23uurmw94aos9lda2hdf0 
+       foreign key (vehicle_id) 
+       references vehicle;
+
+    create table buyer (
+        birth_date date not null,
+        id bigserial not null,
+        cpf varchar(14) not null,
+        rg varchar(14) not null,
+        name varchar(100) not null,
+        cep varchar(255) not null,
+        city varchar(255) not null,
+        email varchar(255) not null,
+        road varchar(255) not null,
+        state varchar(255) not null,
+        telephone varchar(255) not null,
+        primary key (id)
+    );
+
+    create table sales_records (
+        sale_date date not null,
+        buyer_id bigint not null,
+        id bigserial not null,
+        vehicle_id bigint not null,
+        payment varchar(255) not null check (payment in ('MONEY','DEBIT','CREDIT')),
+        primary key (id)
+    );
+
+    create table vehicle (
+        amount_passengers numeric(38,0) not null check (amount_passengers>=1),
+        door_quantity numeric(38,0) not null check (door_quantity>=1),
+        mileage float4 not null check (mileage>=0),
+        purchase_price float(53) not null,
+        sale_price float(53) not null,
+        year date not null,
+        plate varchar(7) not null,
+        id bigserial not null,
+        renavem bigint not null unique,
+        model varchar(100) not null,
+        brand varchar(255) not null,
+        chassis_number varchar(255) not null unique,
+        color varchar(255) not null check (color in ('RED','BLUE','GREEN')),
+        cylinder_capacity varchar(255) not null,
+        sale_situation varchar(255) not null check (sale_situation in ('SOLD','AVAILABLE')),
+        transmission varchar(255) not null check (transmission in ('MANUAL','SEMIAUTOMATIC','AUTOMATIC')),
+        primary key (id)
+    );
+
+    alter table if exists sales_records 
+       add constraint FKsgba4lq96wgg64wrocf7fh9h0 
+       foreign key (buyer_id) 
+       references buyer;
+
+    alter table if exists sales_records 
+       add constraint FK5brf23uurmw94aos9lda2hdf0 
+       foreign key (vehicle_id) 
+       references vehicle;
+
+    create table buyer (
+        birth_date date not null,
+        id bigserial not null,
+        cpf varchar(14) not null,
+        rg varchar(14) not null,
+        name varchar(100) not null,
+        cep varchar(255) not null,
+        city varchar(255) not null,
+        email varchar(255) not null,
+        road varchar(255) not null,
+        state varchar(255) not null,
+        telephone varchar(255) not null,
+        primary key (id)
+    );
+
+    create table sales_records (
+        sale_date date not null,
+        buyer_id bigint not null,
+        id bigserial not null,
+        vehicle_id bigint not null,
+        payment varchar(255) not null check (payment in ('MONEY','DEBIT','CREDIT')),
+        primary key (id)
+    );
+
+    create table vehicle (
+        amount_passengers numeric(38,0) not null check (amount_passengers>=1),
+        door_quantity numeric(38,0) not null check (door_quantity>=1),
+        mileage float4 not null check (mileage>=0),
+        purchase_price float(53) not null,
+        sale_price float(53) not null,
+        year date not null,
+        plate varchar(7) not null,
+        id bigserial not null,
+        renavem bigint not null unique,
+        model varchar(100) not null,
+        brand varchar(255) not null,
+        chassis_number varchar(255) not null unique,
+        color varchar(255) not null check (color in ('RED','BLUE','GREEN')),
+        cylinder_capacity varchar(255) not null,
+        sale_situation varchar(255) not null check (sale_situation in ('SOLD','AVAILABLE')),
+        transmission varchar(255) not null check (transmission in ('MANUAL','SEMIAUTOMATIC','AUTOMATIC')),
+        primary key (id)
+    );
+
+    alter table if exists sales_records 
+       add constraint FKsgba4lq96wgg64wrocf7fh9h0 
+       foreign key (buyer_id) 
+       references buyer;
+
+    alter table if exists sales_records 
+       add constraint FK5brf23uurmw94aos9lda2hdf0 
+       foreign key (vehicle_id) 
+       references vehicle;
